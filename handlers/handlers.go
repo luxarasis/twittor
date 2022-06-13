@@ -16,6 +16,8 @@ func Managers() {
 	router := mux.NewRouter()
 
 	router.HandleFunc("/singin", middlew.CheckDB(routers.SingIn)).Methods("POST")
+	router.HandleFunc("/login", middlew.CheckDB(routers.Login)).Methods("POST")
+	router.HandleFunc("/profile", middlew.CheckDB(middlew.ValidateJWT(routers.Profile))).Methods("GET")
 
 	PORT := os.Getenv("PORT")
 	if PORT == "" {
